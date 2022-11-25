@@ -27,7 +27,12 @@ app.get("/api", (req, res) => {
     res.json(makeDateJson(date));
 });
 
-
+app.get("/api/:date", (req, res) => {
+    let date = new Date((isNaN(req.params.date)? req.params.date : Number(req.params.date)));
+    if (date.toString() == "Invalid Date")
+        res.json({error: "Invalid Date"});
+    res.json(makeDateJson(date));
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
